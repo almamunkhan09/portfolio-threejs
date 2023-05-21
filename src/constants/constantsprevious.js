@@ -25,7 +25,7 @@ import {
   web,
 } from '../assets';
 
-export const navLinks = [
+const navLinks = [
   {
     id: 'about',
     title: 'About',
@@ -262,4 +262,11 @@ const projects = [
   },
 ];
 
-export { experiences, projects, services, technologies, testimonials };
+export {
+  experiences,
+  navigationLinks,
+  projects,
+  services,
+  technologies,
+  testimonials,
+};
