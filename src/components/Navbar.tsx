@@ -6,6 +6,7 @@ import { styles } from '../styles';
 
 const Navbar = () => {
   const [active, setAcive] = useState('');
+  const [toggle, setToggle] = useState(false);
 
   return (
     <nav
@@ -21,9 +22,9 @@ const Navbar = () => {
           }}
         >
           <img src={logo} alt="logo" className=" w-12 h-12 object-contain " />
-          <p className={`text-white text-[24px] font-bold cursor-pointer`}>
-            Al Mamun Khan{' '}
-            <span className="sm:block hidden">| Web Developer</span>
+          <p className={`text-white text-[24px] font-bold cursor-pointer flex`}>
+            Al Mamun Khan &nbsp;
+            <span className="md:block hidden"> | Web Developer</span>
           </p>
         </Link>
         <ul className=" list-none hidden sm:flex flex-row gap-10 ">
@@ -34,7 +35,7 @@ const Navbar = () => {
                 <Link
                   to={link.title}
                   className={`${
-                    active === link.title ? 'text-white' : 'text-gray-400'
+                    active === link.title ? 'text-white' : 'text-secondary'
                   } text-[16px] cursor-pointer hover:text-white font-medium`}
                   onClick={() => {
                     setAcive(link.id);
@@ -48,7 +49,38 @@ const Navbar = () => {
           })}{' '}
         </ul>
         <div className="sm:hidden flex flex-1 justify-end items-center">
-          <img src={menu} className=" w-[28px] h-[28px] " />
+          <img
+            src={toggle ? close : menu}
+            className=" w-[28px] h-[28px] object-contain cursor-pointer "
+            onClick={() => setToggle(!toggle)}
+          />
+          <div
+            className={`${
+              !toggle ? 'hidden' : 'flex'
+            } p-6 absolute top-20 right-0 mx-4 my-2 min-w-[140px] black-gradient z-10 rounded-xl `}
+          >
+            <ul className=" list-none flex  flex-col gap-4 justify-end items-start ">
+              {' '}
+              {navigationLinks.map((link) => {
+                return (
+                  <li key={link.id} className={`flex items-center gap-2`}>
+                    <Link
+                      to={link.title.toLowerCase()}
+                      className={`${
+                        active === link.title ? 'text-white' : 'text-secondary'
+                      } text-[16px] font-poppins font-medium cursor-pointer `}
+                      onClick={() => {
+                        setAcive(link.id);
+                        window.scrollTo(0, 0);
+                      }}
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                );
+              })}{' '}
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
